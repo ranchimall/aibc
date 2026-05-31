@@ -126,18 +126,16 @@ async function loadTokenPrice() {
             muonProfitShare.toFixed(2) +
             '%';    
 
-        document.querySelector('#muon_holding_contribution')
-            .innerText =
-            muonValuationContribution.toFixed(2) +
-            ' USDT';
+
         document.querySelector('#muon_holding_contribution_bottom')
             .innerText =
             muonValuationContribution.toFixed(2) + ' USDT';
 
         document.querySelector('#muon_holding_share')
             .innerText =
+            'Share of InvestAI: ' +
             muonProfitShare.toFixed(2) +
-            '% of InvestAI#';
+            '%';
 
         document.querySelector('#muon_holding_invested')
             .innerText =
@@ -194,18 +192,15 @@ async function loadTokenPrice() {
             tsmonProfitShare.toFixed(2) +
             '%';    
 
-        document.querySelector('#tsmon_holding_contribution')
-            .innerText =
-            tsmonValuationContribution.toFixed(2) +
-            ' USDT';
         document.querySelector('#tsmon_holding_contribution_bottom')
             .innerText =
             tsmonValuationContribution.toFixed(2) + ' USDT';    
 
         document.querySelector('#tsmon_holding_share')
             .innerText =
+            'Share of InvestAI: ' +
             tsmonProfitShare.toFixed(2) +
-            '% of InvestAI#';
+            '%';
 
         document.querySelector('#tsmon_holding_invested')
             .innerText =
@@ -262,19 +257,15 @@ async function loadTokenPrice() {
             googlonProfitShare.toFixed(2) +
             '%';
 
-        document.querySelector('#googlon_holding_contribution')
-            .innerText =
-            googlonValuationContribution.toFixed(2) +
-            ' USDT';
         document.querySelector('#googlon_holding_contribution_bottom')
             .innerText =
             googlonValuationContribution.toFixed(2) + ' USDT';    
 
         document.querySelector('#googlon_holding_share')
             .innerText =
+            'Share of InvestAI: ' +
             googlonProfitShare.toFixed(2) +
-            '% of InvestAI#';
-
+            '%';
         document.querySelector('#googlon_holding_invested')
             .innerText =
             GOOGLON_INVESTED.toFixed(2) +

@@ -526,6 +526,7 @@ table td:last-of-type {
 .holding-card dd {
   font-weight: 600;
   text-align: right;
+  white-space: nowrap;
 }
 
 button.holding-card {
@@ -540,6 +541,17 @@ button.holding-card:hover, button.holding-card:focus-visible {
   box-shadow: 0 0 0 1px rgba(61, 90, 254, 0.1), 0 0.8rem 1.5rem rgba(61, 90, 254, 0.12);
   transform: translateY(-1px);
   outline: none;
+}
+
+.holding-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.holding-stat strong {
+    text-align: right;
+    white-space: nowrap;
 }
 
 .holding-contribution-label {
