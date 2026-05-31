@@ -632,6 +632,14 @@ button.holding-card:hover, button.holding-card:focus-visible {
   }
 }
 
+@media screen and (max-width: 760px) {
+
+  #mobile_holding_details_container {
+    display: contents;
+  }
+
+}
+
 .hidden {
   display: none;
 }
