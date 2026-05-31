@@ -68,20 +68,6 @@ async function loadTokenPrice() {
             data.tokenPrice.toFixed(12) +
             ' USDT';
 
-        // Update statistics table
-
-        document.querySelector('#muon_current')
-            .innerText =
-            data.currentMuonValue.toFixed(2);
-
-        document.querySelector('#tsmon_current')
-            .innerText =
-            data.currentTSMonValue.toFixed(2);
-
-        document.querySelector('#googlon_current')
-            .innerText =
-            data.currentGOOGLonValue.toFixed(2);    
-
         // ===== Contribution Breakdown =====
 
         document.querySelector('#investai_contribution')
