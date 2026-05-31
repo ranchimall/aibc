@@ -133,9 +133,7 @@ async function loadTokenPrice() {
 
         document.querySelector('#muon_holding_share')
             .innerText =
-            'Share of InvestAI: ' +
-            muonProfitShare.toFixed(2) +
-            '%';
+            muonProfitShare.toFixed(2) + '%';
 
         document.querySelector('#muon_holding_invested')
             .innerText =
@@ -198,9 +196,7 @@ async function loadTokenPrice() {
 
         document.querySelector('#tsmon_holding_share')
             .innerText =
-            'Share of InvestAI: ' +
-            tsmonProfitShare.toFixed(2) +
-            '%';
+            tsmonProfitShare.toFixed(2) + '%';
 
         document.querySelector('#tsmon_holding_invested')
             .innerText =
@@ -263,9 +259,7 @@ async function loadTokenPrice() {
 
         document.querySelector('#googlon_holding_share')
             .innerText =
-            'Share of InvestAI: ' +
-            googlonProfitShare.toFixed(2) +
-            '%';
+            googlonProfitShare.toFixed(2) + '%';
         document.querySelector('#googlon_holding_invested')
             .innerText =
             GOOGLON_INVESTED.toFixed(2) +
