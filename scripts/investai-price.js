@@ -87,6 +87,9 @@ async function loadTokenPrice() {
         document.querySelector('#investai_contribution')
             .innerText =
             data.valuation.toFixed(2) + ' USDT';
+        document.querySelector('#investai_aggregate_profit')
+            .innerText =
+        data.profit.toFixed(2) + ' USDT';    
 
         document.querySelector('#openclaw_contribution')
             .innerText =

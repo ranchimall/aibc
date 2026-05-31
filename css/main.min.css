@@ -442,7 +442,7 @@ table td:last-of-type {
 }
 
 .contribution-item {
-  text-align: center;
+  text-align: left;
   min-width: 0;
   padding: 1.2rem 1rem;
   border: 1px solid rgba(var(--text-color), 0.12);
@@ -469,12 +469,26 @@ table td:last-of-type {
 .contribution-value {
   color: rgba(var(--text-color), 0.8);
   font-weight: 600;
+  text-align: left;
 }
 
 .contribution-percent {
   margin-top: 0.8rem;
   font-size: 0.8rem;
   color: rgba(var(--text-color), 0.85);
+}
+
+.contribution-label {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  text-align: left;
+}
+
+.contribution-extra-value {
+  font-weight: 600;
+  margin-top: 0.25rem;
+  text-align: left;
 }
 
 @media screen and (max-width: 640px) {
