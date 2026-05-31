@@ -154,47 +154,6 @@ async function loadTokenPrice() {
             muonProfit.toFixed(2) +
             ' USDT';
 
-        document.querySelector('#muon_detail_invested')
-            .innerText =
-            MUON_INVESTED.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_detail_units')
-            .innerText =
-            MUON_UNITS +
-            ' MUon';
-
-        document.querySelector('#muon_detail_buy_price')
-            .innerText =
-            MUON_AVG_BUY_PRICE.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_detail_current_price')
-            .innerText =
-            data.muonPrice.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_detail_current_value')
-            .innerText =
-            data.currentMuonValue.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_detail_profit')
-            .innerText =
-            muonProfit.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_detail_valuation_contribution')
-            .innerText =
-            muonValuationContribution.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_detail_profit_share')
-            .innerText =
-            muonProfitShare.toFixed(2) +
-            '%';
-
-
         document.querySelector('#tsmon_invested')
             .innerText =
             TSMON_INVESTED.toFixed(2) +
