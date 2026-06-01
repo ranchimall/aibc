@@ -75,21 +75,25 @@ async function loadTokenPrice() {
             .innerText =
             String(data.nasdaqPE);
 
+        document.querySelector('#investai_applied_pe')
+            .innerText =
+        data.adjustedPE.toFixed(2);    
+
         document.querySelector('#adjusted_pe')
             .innerText =
-            String(data.nasdaqPE);   
+            data.adjustedPE.toFixed(2);   
             
         document.querySelector('#muon_applied_pe')
             .innerText =
-            String(data.nasdaqPE);
+            data.adjustedPE.toFixed(2);
 
         document.querySelector('#tsmon_applied_pe')
             .innerText =
-            String(data.nasdaqPE);
+            data.adjustedPE.toFixed(2);
 
         document.querySelector('#googlon_applied_pe')
             .innerText =
-            String(data.nasdaqPE);   
+            data.adjustedPE.toFixed(2);   
 
         // ===== Contribution Breakdown =====
 
