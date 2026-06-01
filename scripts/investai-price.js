@@ -21,7 +21,7 @@ async function loadTokenPrice() {
             (muonProfit / data.profit) * 100;
 
         const muonValuationContribution =
-            muonProfit * 25;
+            muonProfit * data.adjustedPE;
 
         const TSMON_INVESTED = 50.00;
 
@@ -37,7 +37,7 @@ async function loadTokenPrice() {
             (tsmonProfit / data.profit) * 100;
 
         const tsmonValuationContribution =
-            tsmonProfit * 25;
+            tsmonProfit * data.adjustedPE;
 
         const GOOGLON_INVESTED = 50.00;
 
@@ -53,7 +53,7 @@ async function loadTokenPrice() {
             (googlonProfit / data.profit) * 100;
 
         const googlonValuationContribution =
-            googlonProfit * 25;    
+            googlonProfit * data.adjustedPE;    
 
 
         // Big valuation number
@@ -67,6 +67,29 @@ async function loadTokenPrice() {
             'Exact token price: ' +
             data.tokenPrice.toFixed(12) +
             ' USDT';
+
+        // PE Ratio
+        console.log("nasdaqPE =", data.nasdaqPE);
+        console.log("adjustedPE =", data.adjustedPE);
+        document.querySelector('#nasdaq_pe')
+            .innerText =
+            String(data.nasdaqPE);
+
+        document.querySelector('#adjusted_pe')
+            .innerText =
+            String(data.nasdaqPE);   
+            
+        document.querySelector('#muon_applied_pe')
+            .innerText =
+            String(data.nasdaqPE);
+
+        document.querySelector('#tsmon_applied_pe')
+            .innerText =
+            String(data.nasdaqPE);
+
+        document.querySelector('#googlon_applied_pe')
+            .innerText =
+            String(data.nasdaqPE);   
 
         // ===== Contribution Breakdown =====
 
