@@ -73,7 +73,7 @@ async function loadTokenPrice() {
         console.log("adjustedPE =", data.adjustedPE);
         document.querySelector('#nasdaq_pe')
             .innerText =
-            String(data.nasdaqPE);
+            data.nasdaqPE.toFixed(2); 
 
         document.querySelector('#investai_applied_pe')
             .innerText =
