@@ -105,6 +105,11 @@ async function loadTokenPrice() {
             .innerText =
             data.muonPrice.toFixed(2) +
             ' USDT';
+            
+        document.querySelector('#muon_holding_buy_price')
+            .innerText =
+            MUON_AVG_BUY_PRICE.toFixed(2) +
+            ' USDT';
 
         document.querySelector('#muon_current_value')
             .innerText =
@@ -174,6 +179,11 @@ async function loadTokenPrice() {
             data.tsmonPrice.toFixed(2) +
             ' USDT';
 
+        document.querySelector('#tsmon_holding_buy_price')
+            .innerText =
+            TSMON_BUY_PRICE.toFixed(2) +
+            ' USDT';
+
         document.querySelector('#tsmon_current_value')
             .innerText =
             data.currentTSMonValue.toFixed(2) +
@@ -239,6 +249,11 @@ async function loadTokenPrice() {
         document.querySelector('#googlon_current_price')
             .innerText =
             data.googlonPrice.toFixed(2) +
+            ' USDT';
+
+        document.querySelector('#googlon_holding_buy_price')
+            .innerText =
+            GOOGLON_BUY_PRICE.toFixed(2) +
             ' USDT';
 
         document.querySelector('#googlon_current_value')
