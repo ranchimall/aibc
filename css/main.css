@@ -594,6 +594,8 @@ button.holding-card:hover, button.holding-card:focus-visible {
 
 .holding-stat strong {
   text-align: right;
+  font-size: 0.74rem;
+  font-weight: 600;
   white-space: nowrap;
 }
 
