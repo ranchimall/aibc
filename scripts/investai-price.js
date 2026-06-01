@@ -84,53 +84,11 @@ async function loadTokenPrice() {
         document.querySelector('#projectai_contribution')
             .innerText =
             '0.00 USDT';
-
-
-        document.querySelector('#muon_invested')
-            .innerText =
-            MUON_INVESTED.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_units')
-            .innerText =
-            MUON_UNITS +
-            ' MUon';
-
-        document.querySelector('#muon_buy_price')
-            .innerText =
-            MUON_AVG_BUY_PRICE.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_current_price')
-            .innerText =
-            data.muonPrice.toFixed(2) +
-            ' USDT';
             
         document.querySelector('#muon_holding_buy_price')
             .innerText =
             MUON_AVG_BUY_PRICE.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_current_value')
-            .innerText =
-            data.currentMuonValue.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_profit')
-            .innerText =
-            muonProfit.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_valuation_contribution')
-            .innerText =
-            muonValuationContribution.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#muon_profit_share')
-            .innerText =
-            muonProfitShare.toFixed(2) +
-            '%';    
-
+            ' USDT'; 
 
         document.querySelector('#muon_holding_contribution_bottom')
             .innerText =
@@ -157,52 +115,20 @@ async function loadTokenPrice() {
 
         document.querySelector('#muon_holding_price')
             .innerText =
-            data.muonPrice.toFixed(2) + ' USDT';     
-
-        document.querySelector('#tsmon_invested')
+            data.muonPrice.toFixed(2) + ' USDT';   
+            
+        document.querySelector('#muon_holding_units')
             .innerText =
-            TSMON_INVESTED.toFixed(2) +
-            ' USDT';
+            MUON_UNITS + ' MUon';
 
-        document.querySelector('#tsmon_units')
+        document.querySelector('#tsmon_holding_units')
             .innerText =
-            TSMON_UNITS +
-            ' TSMon';
-
-        document.querySelector('#tsmon_buy_price')
-            .innerText =
-            TSMON_BUY_PRICE.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#tsmon_current_price')
-            .innerText =
-            data.tsmonPrice.toFixed(2) +
-            ' USDT';
+            TSMON_UNITS + ' TSMon';
 
         document.querySelector('#tsmon_holding_buy_price')
             .innerText =
             TSMON_BUY_PRICE.toFixed(2) +
             ' USDT';
-
-        document.querySelector('#tsmon_current_value')
-            .innerText =
-            data.currentTSMonValue.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#tsmon_profit')
-            .innerText =
-            tsmonProfit.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#tsmon_valuation_contribution')
-            .innerText =
-            tsmonValuationContribution.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#tsmon_profit_share')
-            .innerText =
-            tsmonProfitShare.toFixed(2) +
-            '%';    
 
         document.querySelector('#tsmon_holding_contribution_bottom')
             .innerText =
@@ -231,54 +157,18 @@ async function loadTokenPrice() {
             .innerText =
             data.tsmonPrice.toFixed(2) + ' USDT';    
 
-        document.querySelector('#googlon_invested')
+        document.querySelector('#googlon_holding_units')
             .innerText =
-            GOOGLON_INVESTED.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#googlon_units')
-            .innerText =
-            GOOGLON_UNITS +
-            ' GOOGLon';
-
-        document.querySelector('#googlon_buy_price')
-            .innerText =
-            GOOGLON_BUY_PRICE.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#googlon_current_price')
-            .innerText =
-            data.googlonPrice.toFixed(2) +
-            ' USDT';
+            GOOGLON_UNITS + ' GOOGLon';
 
         document.querySelector('#googlon_holding_buy_price')
             .innerText =
             GOOGLON_BUY_PRICE.toFixed(2) +
             ' USDT';
 
-        document.querySelector('#googlon_current_value')
-            .innerText =
-            data.currentGOOGLonValue.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#googlon_profit')
-            .innerText =
-            googlonProfit.toFixed(2) +
-            ' USDT';
-
         document.querySelector('#googlon_holding_price')
             .innerText =
             data.googlonPrice.toFixed(2) + ' USDT';     
-
-        document.querySelector('#googlon_valuation_contribution')
-            .innerText =
-            googlonValuationContribution.toFixed(2) +
-            ' USDT';
-
-        document.querySelector('#googlon_profit_share')
-            .innerText =
-            googlonProfitShare.toFixed(2) +
-            '%';
 
         document.querySelector('#googlon_holding_contribution_bottom')
             .innerText =
@@ -302,8 +192,6 @@ async function loadTokenPrice() {
             googlonProfit.toFixed(2) +
             ' USDT';
 
-
-
         console.log(data);
 
     } catch(error) {
@@ -316,58 +204,3 @@ async function loadTokenPrice() {
 }
 
 loadTokenPrice();
-
-const muonHoldingToggle =
-    document.querySelector('#muon_holding_toggle');
-
-const muonHoldingDetails =
-    document.querySelector('#muon_holding_details');
-
-muonHoldingToggle.addEventListener('click', function() {
-
-    const isOpen =
-        !muonHoldingDetails.classList.contains('hidden');
-
-    muonHoldingDetails.classList.toggle('hidden', isOpen);
-
-    muonHoldingToggle.setAttribute(
-        'aria-expanded',
-        String(!isOpen)
-    );
-});
-
-const tsmonHoldingToggle =
-    document.querySelector('#tsmon_holding_toggle');
-
-const tsmonHoldingDetails =
-    document.querySelector('#tsmon_holding_details');
-
-tsmonHoldingToggle.addEventListener('click', function() {
-
-    const isOpen =
-        !tsmonHoldingDetails.classList.contains('hidden');
-
-    tsmonHoldingDetails.classList.toggle(
-        'hidden',
-        isOpen
-    );
-
-});
-
-const googlonHoldingToggle =
-    document.querySelector('#googlon_holding_toggle');
-
-const googlonHoldingDetails =
-    document.querySelector('#googlon_holding_details');
-
-googlonHoldingToggle.addEventListener('click', function() {
-
-    const isOpen =
-        !googlonHoldingDetails.classList.contains('hidden');
-
-    googlonHoldingDetails.classList.toggle(
-        'hidden',
-        isOpen
-    );
-
-});

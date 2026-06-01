@@ -177,7 +177,7 @@
             <h2>InvestAI# Holdings</h2>
 
             <div class="holdings-grid">
-                <button class="holding-card holding-card--muon" id="muon_holding_toggle" type="button" aria-controls="muon_holding_details" aria-expanded="false">
+                <div class="holding-card holding-card--muon" id="muon_holding_toggle" type="button" aria-controls="muon_holding_details" aria-expanded="false">
                     <span class="holding-token">M</span>
                     <h3>MUon</h3>
                     <svg class="holding-chart" viewBox="0 0 160 52" aria-hidden="true">
@@ -204,11 +204,18 @@
                             <dt>Acquisition Price</dt>
                             <dd id="muon_holding_buy_price">Loading...</dd>
                         </div>
+                        <div>
+                            <dt>Date of Investment</dt>
+                            <dd>19 May 2026</dd>
+                        </div>
+                        <div>
+                            <dt>Units Owned</dt>
+                            <dd id="muon_holding_units">Loading...</dd>
+                        </div>
                         <div class="holding-stat">
                             <span>Applied PE</span>
                             <strong>25</strong>
                         </div>
-
                         <div class="holding-stat">
                             <span>Valuation Contribution</span>
                             <strong id="muon_holding_contribution_bottom">
@@ -220,9 +227,9 @@
                             <strong id="muon_holding_share">Loading...</strong>
                         </div>
                     </dl>
-                </button>
+                </div>
 
-                <button class="holding-card holding-card--tsmon"
+                <div class="holding-card holding-card--tsmon"
                         id="tsmon_holding_toggle"
                         type="button">
     
@@ -252,6 +259,14 @@
                             <dt>Acquisition Price</dt>
                             <dd id="tsmon_holding_buy_price">Loading...</dd>
                         </div>
+                        <div>
+                            <dt>Date of Investment</dt>
+                            <dd>19 May 2026</dd>
+                        </div>
+                        <div>
+                            <dt>Units Owned</dt>
+                            <dd id="tsmon_holding_units">Loading...</dd>
+                        </div>
                         <div class="holding-stat">
                             <span>Applied PE</span>
                             <strong>25</strong>
@@ -267,11 +282,10 @@
                             <span>Share of InvestAI</span>
                             <strong id="tsmon_holding_share">Loading...</strong>
                         </div>
-                       
                     </dl>
-                </button>
+                </div>
 
-                <button class="holding-card holding-card--googlon"
+                <div class="holding-card holding-card--googlon"
                         id="googlon_holding_toggle"
                         type="button">
                     <span class="holding-token">G</span>
@@ -300,6 +314,14 @@
                             <dt>Acquisition Price</dt>
                             <dd id="googlon_holding_buy_price">Loading...</dd>
                         </div>
+                        <div>
+                            <dt>Date of Investment</dt>
+                            <dd>24 May 2026</dd>
+                        </div>
+                        <div>
+                            <dt>Units Owned</dt>
+                            <dd id="googlon_holding_units">Loading...</dd>
+                        </div>
                         <div class="holding-stat">
                             <span>Applied PE</span>
                             <strong>25</strong>
@@ -316,125 +338,7 @@
                             <strong id="googlon_holding_share">Loading...</strong>
                         </div>
                     </dl>
-                </button>
-
-                <div id="muon_holding_details" class="holding-details hidden">
-                    <h3>MUon Contribution</h3>
-
-                    <p>
-                        <strong>Date of Investment:</strong>
-                        <span>19 May 2026</span>
-                    </p>
-
-                    <p>
-                        <strong>Invested:</strong>
-                        <span id="muon_invested">Loading...</span>
-                    </p>
-
-                    <p>
-                        <strong>Units Owned:</strong>
-                        <span id="muon_units">Loading...</span>
-                    </p>
-
-                    <p>
-                        <strong>Average Buy Price:</strong>
-                        <span id="muon_buy_price">Loading...</span>
-                    </p>
-
-                    <p>
-                        <strong>Current Price:</strong>
-                        <span id="muon_current_price">Loading...</span>
-                    </p>
-
-                    <p>
-                        <strong>Current Value:</strong>
-                        <span id="muon_current_value">Loading...</span>
-                    </p>
-
-                    <p>
-                        <strong>Profit:</strong>
-                        <span id="muon_profit">Loading...</span>
-                    </p>
-
-                    <p>
-                        <strong>Valuation Contribution:</strong>
-                        <span id="muon_valuation_contribution">Loading...</span>
-                    </p>
-
-                    <p>
-                        <strong>MUon Share of InvestAI Profit:</strong>
-                        <span id="muon_profit_share">Loading...</span>
-                    </p>
                 </div>
-
-                <div id="tsmon_holding_details"
-                     class="holding-details hidden">
-
-                    <h3>TSMon Contribution</h3>
-
-                    <p><strong>Date of Investment:</strong>
-                        <span>19 May 2026</span></p>
-
-                    <p><strong>Invested:</strong>
-                        <span id="tsmon_invested">Loading...</span></p>
-
-                    <p><strong>Units Owned:</strong>
-                        <span id="tsmon_units">Loading...</span></p>
-
-                    <p><strong>Buy Price:</strong>
-                        <span id="tsmon_buy_price">Loading...</span></p>
-
-                    <p><strong>Current Price:</strong>
-                        <span id="tsmon_current_price">Loading...</span></p>
-
-                    <p><strong>Current Value:</strong>
-                        <span id="tsmon_current_value">Loading...</span></p>
-
-                    <p><strong>Profit:</strong>
-                        <span id="tsmon_profit">Loading...</span></p>
-
-                    <p><strong>Valuation Contribution:</strong>
-                        <span id="tsmon_valuation_contribution">Loading...</span></p>
-
-                    <p><strong>TSMon Share of InvestAI Profit:</strong>
-                        <span id="tsmon_profit_share">Loading...</span></p>
-
-                </div>
-
-                <div id="googlon_holding_details"
-                     class="holding-details hidden">
-
-                    <h3>GOOGLon Contribution</h3>
-
-                    <p><strong>Date of Investment:</strong>
-                        <span>24 May 2026</span></p>
-
-                    <p><strong>Invested:</strong>
-                        <span id="googlon_invested">Loading...</span></p>
-
-                    <p><strong>Units Owned:</strong>
-                        <span id="googlon_units">Loading...</span></p>
-
-                    <p><strong>Buy Price:</strong>
-                        <span id="googlon_buy_price">Loading...</span></p>
-
-                    <p><strong>Current Price:</strong>
-                        <span id="googlon_current_price">Loading...</span></p>
-
-                    <p><strong>Current Value:</strong>
-                        <span id="googlon_current_value">Loading...</span></p>
-
-                    <p><strong>Profit:</strong>
-                        <span id="googlon_profit">Loading...</span></p>
-
-                    <p><strong>Valuation Contribution:</strong>
-                        <span id="googlon_valuation_contribution">Loading...</span></p>
-
-                    <p><strong>GOOGLon Share of InvestAI Profit:</strong>
-                        <span id="googlon_profit_share">Loading...</span></p>
-
-                </div>
-
             </div>
         </section>
 
