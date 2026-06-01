@@ -2,7 +2,7 @@ name: Update InvestAI Prices
 
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/1 * * * *'
 
   workflow_dispatch:
 
@@ -42,7 +42,7 @@ jobs:
           # ===== FETCH FUNCTION =====
 
           def get_latest_price(symbol):
-              url = f"https://app.ondo.finance/api/v2/assets/{symbol}/history?range=10min"
+              url = f"https://app.ondo.finance/api/v2/assets/{symbol}/history?range=1min"
 
               response = requests.get(url)
 
