@@ -14,12 +14,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ADDING THIS BLOCK
+      - name: Install dependencies
+        run: |
+          pip install yfinance
+      #BLOCK OVER
+
       - name: Fetch prices and generate JSON
         run: |
           python <<EOF
           import json
           import requests
-
+          import yfinance as yf
           # ===== CONFIG =====
 
           TOTAL_SUPPLY = 1_000_000_000_000
@@ -34,9 +40,19 @@ jobs:
           GOOGLON_BUY_PRICE = 374.30
 
           MUON_UNITS = 0.15248
+          
+          qqqm = yf.Ticker("QQQM")
 
-          NASDAQ_PE = 35
+          try:
+              NASDAQ_PE = qqqm.info["trailingPE"]
+          except:
+              NASDAQ_PE = 35
+
+          print("NASDAQ PE:", NASDAQ_PE)
+
           ADJUSTED_PE = NASDAQ_PE - 10
+
+
 
 
           # ===== FETCH FUNCTION =====
@@ -86,6 +102,9 @@ jobs:
               "portfolioValue": portfolio_value,
               "profit": profit,
               "valuation": valuation,
+
+              "nasdaqPE": NASDAQ_PE,
+              "adjustedPE": ADJUSTED_PE,
 
 
               "muonPrice": muon_price,
