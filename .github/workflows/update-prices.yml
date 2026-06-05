@@ -234,6 +234,7 @@ jobs:
           }
 
           valuation_history = []
+          profit_history = []
 
           all_dates = set()
 
@@ -337,6 +338,14 @@ jobs:
                   round(profit, 2)
               )
 
+              profit_history.append({
+                  "date": date,
+                  "value": round(
+                      profit,
+                      2
+                  )
+              })
+
               valuation = max(
                   0,
                   profit * ADJUSTED_PE
@@ -354,7 +363,8 @@ jobs:
               "muon": muon_chart_history,
               "tsmon": tsmon_chart_history,
               "googlon": googlon_chart_history,
-              "valuation": valuation_history
+              "valuation": valuation_history,
+              "profit": profit_history
           }
 
 
