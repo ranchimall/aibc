@@ -23,21 +23,30 @@
             color: var(--primary-blue);
             background-color: #ffffff;
             padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
             display: flex;
-            flex-wrap: wrap;
-            max-width: 1200px;
+            flex-wrap: nowrap;
+            width: fit-content;
+            max-width: 100%;
             margin: 0 auto;
             align-items: center;
+            justify-content: center;
         }
 
         /* --- Sidebar Title --- */
         .sidebar {
-            flex: 1 1 300px;
+            width: 560px;
             padding-right: 40px;
             text-align: right;
+            flex-shrink: 0;
+            text-align: right;
+            white-space: nowrap;
         }
 
         .sidebar h1 {
@@ -48,7 +57,8 @@
 
         /* --- Main Flowchart Area --- */
         .flowchart {
-            flex: 2 1 700px;
+            width: 700px;
+            max-width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -236,7 +246,7 @@
 
     <div class="container">
         <div class="sidebar">
-            <h1>Token Structure for<br>Artificial Intelligence<br>initiatives of<br>RanchiMall</h1>
+            <h1>Token Structure for<br>Artificial Intelligence initiatives<br>of RanchiMall</h1>
         </div>
 
         <div class="flowchart">
