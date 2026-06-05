@@ -444,6 +444,11 @@ async function loadValuationChart() {
                 item => item.value
             );
 
+        const profitData =
+            history.profit.map(
+                item => item.value
+            );    
+
         const ctx =
             document
             .getElementById(
@@ -484,6 +489,9 @@ async function loadValuationChart() {
 
                         data:
                             valuationData,
+                            
+                        yAxisID:
+                            'valuationAxis',
 
                         backgroundColor:
                             valuationGradient,
@@ -494,6 +502,29 @@ async function loadValuationChart() {
 
                         borderColor:
                             '#7557F2',
+
+                        tension: 0.3,
+
+                        pointRadius: 0,
+
+                        pointHoverRadius: 6
+                    },
+
+                    {
+                        label: 'Portfolio Profit',
+
+                        data:
+                            profitData,
+
+                        yAxisID:
+                            'profitAxis',
+
+                        fill: false,
+
+                        borderWidth: 3,
+
+                        borderColor:
+                            '#2EC774',
 
                         tension: 0.3,
 
@@ -513,6 +544,27 @@ async function loadValuationChart() {
                 interaction: {
                     mode: 'index',
                     intersect: false
+                },
+
+                scales: {
+
+                    valuationAxis: {
+
+                        type: 'linear',
+
+                        position: 'left'
+                    },
+
+                    profitAxis: {
+
+                        type: 'linear',
+
+                        position: 'right',
+
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
                 },
 
                 plugins: {
