@@ -213,13 +213,22 @@
 
         /* --- Responsive Queries --- */
         @media (max-width: 968px) {
+            body {
+                align-items: flex-start;
+            }
+            
             .container {
                 flex-direction: column;
+                width: 100%;
             }
             .sidebar {
+                width: 100%;
                 text-align: center;
                 padding-right: 0;
                 margin-bottom: 40px;
+            }
+            .flowchart {
+                width: 100%;
             }
         }
 
