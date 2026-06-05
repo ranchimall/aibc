@@ -26,6 +26,8 @@ jobs:
           import json
           import requests
           import yfinance as yf
+          from datetime import datetime
+          
           # ===== CONFIG =====
 
           TOTAL_SUPPLY = 1_000_000_000_000
@@ -40,6 +42,10 @@ jobs:
           GOOGLON_BUY_PRICE = 374.30
 
           MUON_UNITS = 0.15248
+
+          MUON_START_DATE = "2026-05-19"
+          TSMON_START_DATE = "2026-05-19"
+          GOOGLON_START_DATE = "2026-05-24"
           
           qqqm = yf.Ticker("QQQM")
 
@@ -52,6 +58,48 @@ jobs:
 
           ADJUSTED_PE = NASDAQ_PE - 10
 
+          # ===== BINANCE HISTORY =====
+
+          def get_daily_klines(token_address):
+
+              url = (
+                  "https://www.binance.com/bapi/defi/v1/public/"
+                  "alpha-trade/agg-klines"
+                  f"?chainId=56"
+                  f"&interval=1d"
+                  f"&tokenAddress={token_address}"
+                  f"&dataType=aggregate"
+              )
+
+              response = requests.get(url)
+
+              data = response.json()
+
+              return data["data"]["klineInfos"]
+
+          def build_history(candles, start_date):
+
+              history = []
+
+              for candle in candles:
+
+                  timestamp = int(candle[0]) / 1000
+
+                  date = datetime.utcfromtimestamp(
+                      timestamp
+                  ).strftime("%Y-%m-%d")
+
+                  if date >= start_date:
+
+                      history.append({
+                          "date": date,
+                          "open": float(candle[1]),
+                          "high": float(candle[2]),
+                          "low": float(candle[3]),
+                          "close": float(candle[4])
+                      })
+
+              return history    
 
 
 
@@ -83,6 +131,63 @@ jobs:
           print("MUon:", muon_price)
           print("TSMon:", tsmon_price)
           print("GOOGLon:", googlon_price)
+
+          # ===== FETCH HISTORICAL DATA =====
+          muon_history = get_daily_klines(
+              "0x8b6acf6041a81567f012ff6a4c6d96d5818d74bf"
+          )
+
+          tsmon_history = get_daily_klines(
+              "0xc37042a7a4fa510d8884a433762ab87257b91965"
+          )
+
+          googlon_history = get_daily_klines(
+              "0x091fc7778e6932d4009b087b191d1ee3bac5729a"
+          )
+
+          muon_chart_history = build_history(
+              muon_history,
+              MUON_START_DATE
+          )
+
+          tsmon_chart_history = build_history(
+              tsmon_history,
+              TSMON_START_DATE
+          )
+
+          googlon_chart_history = build_history(
+              googlon_history,
+              GOOGLON_START_DATE
+          )
+
+          print("Filtered MUon days:", len(muon_chart_history))
+          print("Filtered TSMon days:", len(tsmon_chart_history))
+          print("Filtered GOOGLon days:", len(googlon_chart_history))
+
+          print("MUon candles:", len(muon_history))
+          print("TSMon candles:", len(tsmon_history))
+          print("GOOGLon candles:", len(googlon_history))
+
+          print("MUon history type:", type(muon_history))
+          print("MUon first candle:")
+          print(muon_history[0])
+
+          print("MUon last candle:")
+          print(muon_history[-1])
+
+          print("TSMon history type:", type(tsmon_history))
+          print("TSMon first candle:")
+          print(tsmon_history[0])
+
+          print("TSMon last candle:")
+          print(tsmon_history[-1])
+
+          print("GOOGLon history type:", type(googlon_history))
+          print("GOOGLon first candle:")
+          print(googlon_history[0])
+
+          print("GOOGLon last candle:")
+          print(googlon_history[-1])
 
 
           # ===== CALCULATIONS =====
@@ -128,6 +233,136 @@ jobs:
               "currentGOOGLonValue": current_googlon_value
           }
 
+          valuation_history = []
+
+          all_dates = set()
+
+          for item in muon_chart_history:
+              all_dates.add(item["date"])
+
+          for item in tsmon_chart_history:
+              all_dates.add(item["date"])
+
+          for item in googlon_chart_history:
+              all_dates.add(item["date"])
+
+          all_dates = sorted(all_dates)
+
+          muon_map = {
+              x["date"]: x["close"]
+              for x in muon_chart_history
+          }
+
+          tsmon_map = {
+              x["date"]: x["close"]
+              for x in tsmon_chart_history
+          }
+
+          googlon_map = {
+              x["date"]: x["close"]
+              for x in googlon_chart_history
+          }
+
+          last_muon_price = None
+          last_tsmon_price = None
+          last_googlon_price = None
+
+          for date in all_dates:
+
+              muon_price = muon_map.get(date)
+
+              if muon_price is not None:
+                  last_muon_price = muon_price
+              else:
+                  muon_price = last_muon_price
+
+              tsmon_price = tsmon_map.get(date)
+
+              if tsmon_price is not None:
+                  last_tsmon_price = tsmon_price
+              else:
+                  tsmon_price = last_tsmon_price
+
+              googlon_price = googlon_map.get(date)
+
+              if googlon_price is not None:
+                  last_googlon_price = googlon_price
+              else:
+                  googlon_price = last_googlon_price
+
+              muon_value = (
+                  muon_units * muon_price
+                  if muon_price is not None
+                  else 0
+              )
+
+              tsmon_value = (
+                  tsmon_units * tsmon_price
+                  if tsmon_price is not None
+                  else 0
+              )
+
+              googlon_value = (
+                  googlon_units * googlon_price
+                  if googlon_price is not None
+                  else 0
+              )
+
+              portfolio_value = (
+                  muon_value +
+                  tsmon_value +
+                  googlon_value
+              )
+
+              historical_invested = 0
+
+              if date >= "2026-05-19":
+                  historical_invested += MUON_INVESTED
+
+              if date >= "2026-05-19":
+                  historical_invested += TSMON_INVESTED
+
+              if date >= "2026-05-24":
+                  historical_invested += GOOGLON_INVESTED
+
+              profit = (
+                  portfolio_value -
+                  historical_invested
+              )
+
+              print(
+                  date,
+                  round(portfolio_value, 2),
+                  round(historical_invested, 2),
+                  round(profit, 2)
+              )
+
+              valuation = max(
+                  0,
+                  profit * ADJUSTED_PE
+              )
+
+              valuation_history.append({
+                  "date": date,
+                  "value": round(
+                      valuation,
+                      2
+                  )
+              })
+
+          history_result = {
+              "muon": muon_chart_history,
+              "tsmon": tsmon_chart_history,
+              "googlon": googlon_chart_history,
+              "valuation": valuation_history
+          }
+
+
+
+          with open("data/history.json", "w") as f:
+              json.dump(history_result, f, indent=2)
+          
+          
           with open("data/prices.json", "w") as f:
               json.dump(result, f, indent=2)
 
@@ -141,6 +376,7 @@ jobs:
           git config user.email "github-actions@github.com"
 
           git add data/prices.json
+          git add data/history.json
 
           git diff --cached --quiet || git commit -m "Update investai prices"
 
