@@ -53,13 +53,31 @@ async function loadTokenPrice() {
             (googlonProfit / data.profit) * 100;
 
         const googlonValuationContribution =
-            googlonProfit * data.adjustedPE;    
+            googlonProfit * data.adjustedPE;  
+            
+        const projectAIResponse =
+            await fetch('./data/projectai.json?v=' + Date.now());
+
+        const projectAIData = await projectAIResponse.json();   
+        
+        const totalAIBCValuation =
+            data.valuation + projectAIData.valuation;
+
+        const investAIContributionPercent =
+            totalAIBCValuation > 0
+                ? (data.valuation / totalAIBCValuation) * 100
+                : 0;
+
+        const projectAIContributionPercent =
+            totalAIBCValuation > 0
+                ? (projectAIData.valuation / totalAIBCValuation) * 100
+                : 0;    
 
 
         // Big valuation number
         document.querySelector('#valuation_display')
             .innerText =
-            data.valuation.toFixed(2) + ' USDT';
+            totalAIBCValuation.toFixed(2) + ' USDT';
 
         // Exact token price
         document.querySelector('#token_price')
@@ -97,6 +115,10 @@ async function loadTokenPrice() {
 
         // ===== Contribution Breakdown =====
 
+        document.querySelector('#investai_percent')
+            .innerText =
+            investAIContributionPercent.toFixed(2) + '%';
+        
         document.querySelector('#investai_contribution')
             .innerText =
             data.valuation.toFixed(2) + ' USDT';
@@ -108,9 +130,13 @@ async function loadTokenPrice() {
             .innerText =
             '0.00 USDT';
 
+        document.querySelector('#projectai_percent')
+            .innerText =
+            projectAIContributionPercent.toFixed(2) + '%';
+            
         document.querySelector('#projectai_contribution')
             .innerText =
-            '0.00 USDT';
+            projectAIData.valuation.toLocaleString() + ' USDT';
             
         document.querySelector('#muon_holding_buy_price')
             .innerText =

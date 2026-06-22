@@ -11,15 +11,9 @@ async function loadProjectAI() {
         const data =
             await response.json();
 
-        const VALUE_PER_VIEW = 1;
+        const VALUE_PER_VIEW = data.valuePerView;
 
-        const valuationContribution =
-            data.currentViews * VALUE_PER_VIEW;
-
-        document.querySelector(
-            '#projectai_percent'
-        ).innerText =
-            '0.00%';
+        const valuationContribution = data.valuation;
 
         document.querySelector(
             '#projectai_value_per_view'

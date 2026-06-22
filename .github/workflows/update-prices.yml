@@ -243,10 +243,16 @@ jobs:
               lifetime_views - YOUTUBE_STARTING_POINT
           )
 
+          PROJECTAI_VALUE_PER_VIEW = 1
+
+          projectai_valuation = current_views * PROJECTAI_VALUE_PER_VIEW
+
           projectai_result = {
               "lifetimeViews": lifetime_views,
               "startingPoint": YOUTUBE_STARTING_POINT,
-              "currentViews": current_views
+              "currentViews": current_views,
+              "valuePerView": PROJECTAI_VALUE_PER_VIEW,
+              "valuation": projectai_valuation
           }
 
           print("Lifetime Views:", lifetime_views)
