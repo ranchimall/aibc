@@ -7,6 +7,8 @@ async function loadTokenPrice() {
 
         const data = await response.json();
 
+        const TOTAL_SUPPLY = 1_000_000_000_000;
+
         const MUON_INVESTED = 101.936287;
 
         const MUON_UNITS = 0.15248;
@@ -59,9 +61,19 @@ async function loadTokenPrice() {
             await fetch('./data/projectai.json?v=' + Date.now());
 
         const projectAIData = await projectAIResponse.json();   
+
+        const projectAIValuePerView =
+            projectAIData.valuePerView ?? 1;
+
+        const projectAIValuation =
+            projectAIData.valuation ??
+            projectAIData.currentViews * projectAIValuePerView;
         
         const totalAIBCValuation =
-            data.valuation + projectAIData.valuation;
+            data.valuation + projectAIValuation;
+
+        const totalAIBCTokenPrice =
+            totalAIBCValuation / TOTAL_SUPPLY;    
 
         const investAIContributionPercent =
             totalAIBCValuation > 0
@@ -70,7 +82,7 @@ async function loadTokenPrice() {
 
         const projectAIContributionPercent =
             totalAIBCValuation > 0
-                ? (projectAIData.valuation / totalAIBCValuation) * 100
+                ? (projectAIValuation / totalAIBCValuation) * 100
                 : 0;    
 
 
@@ -83,7 +95,7 @@ async function loadTokenPrice() {
         document.querySelector('#token_price')
             .innerText =
             'Exact token price: ' +
-            data.tokenPrice.toFixed(12) +
+            totalAIBCTokenPrice.toFixed(12) +
             ' USDT';
 
         // PE Ratio
@@ -136,7 +148,7 @@ async function loadTokenPrice() {
             
         document.querySelector('#projectai_contribution')
             .innerText =
-            projectAIData.valuation.toLocaleString() + ' USDT';
+            projectAIValuation.toLocaleString() + ' USDT';
             
         document.querySelector('#muon_holding_buy_price')
             .innerText =
