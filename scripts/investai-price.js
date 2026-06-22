@@ -75,6 +75,12 @@ async function loadTokenPrice() {
         const totalAIBCTokenPrice =
             totalAIBCValuation / TOTAL_SUPPLY;    
 
+        const investAITokenPrice =
+            data.valuation / TOTAL_SUPPLY;
+
+        const projectAITokenPrice =
+            projectAIValuation / TOTAL_SUPPLY;
+
         const investAIContributionPercent =
             totalAIBCValuation > 0
                 ? (data.valuation / totalAIBCValuation) * 100
@@ -97,6 +103,52 @@ async function loadTokenPrice() {
             'Exact token price: ' +
             totalAIBCTokenPrice.toFixed(12) +
             ' USDT';
+
+        document.querySelector('#hero_investai_valuation')
+            .innerText =
+            data.valuation.toFixed(2) + ' USDT';
+
+        document.querySelector('#hero_projectai_valuation')
+            .innerText =
+            projectAIValuation.toFixed(2) + ' USDT';
+
+        document.querySelector('#projectai_valuation_display')
+            .innerText =
+            projectAIValuation.toFixed(2) + ' USDT';
+
+        document.querySelector('#projectai_token_price')
+            .innerText =
+            'Exact token price: ' +
+            projectAITokenPrice.toFixed(12) +
+            ' USDT';
+
+        
+
+        document.querySelector('#projectai_box_value_per_view')
+            .innerText =
+            projectAIValuePerView.toFixed(2);
+
+        document.querySelector('#projectai_box_current_views')
+            .innerText =
+            projectAIData.currentViews.toLocaleString();
+
+        document.querySelector('#investai_valuation_display')
+            .innerText =
+            data.valuation.toFixed(2) + ' USDT';
+
+        document.querySelector('#investai_token_price')
+            .innerText =
+            'Exact token price: ' +
+            investAITokenPrice.toFixed(12) +
+            ' USDT';
+
+        document.querySelector('#investai_box_nasdaq_pe')
+            .innerText =
+            data.nasdaqPE.toFixed(2);
+
+        document.querySelector('#investai_box_adjusted_pe')
+            .innerText =
+            data.adjustedPE.toFixed(2);
 
         // PE Ratio
         console.log("nasdaqPE =", data.nasdaqPE);

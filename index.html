@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.min.css">
     <style>
         .stats-table th:nth-child(2),
         .stats-table td:nth-child(2) {
@@ -69,31 +69,7 @@
                 Currently executing <strong>Tokenization of AI Investments</strong> with <strong>MUon, TSMon, and GOOGLon stocks</strong>
             </p>
         </div>
-        <div id="token_price_wrapper"
-            class="flex flex-direction-column gap-0-5 align-items-center justify-content-center">
 
-            <strong id="valuation_display"
-                style="font-size: 1.8rem; line-height: 1;">
-                Loading...
-            </strong>
-
-            <p style="font-weight:600;">
-                Current AIBC# Valuation <br>
-                Spread Over 1 Trillion Tokens
-            </p>
-
-            <small id="token_price"
-                style="opacity:0.7; text-align:center;">
-                Exact token price loading...
-            </small>
-
-            <p style="font-weight:200;">
-                NASDAQ-100 PE Ratio: <span id="nasdaq_pe">Loading...</span><br>
-                Applied PE: <span id="adjusted_pe">Loading...</span>
-            </p>
-
-        </div>
-        
         <ul class="important-links">
             <li class="important-link">
                 <a href="tokenstructure.html">
@@ -116,6 +92,94 @@
             </li>
         </ul>
 
+        <div id="token_price_wrapper"
+            class="price-wrapper flex flex-direction-column gap-0-5 align-items-center justify-content-center">
+
+            <strong id="valuation_display"
+                style="font-size: 1.8rem; line-height: 1;">
+                Loading...
+            </strong>
+
+            <p style="font-weight:600;">
+                Current AIBC# Valuation <br>
+                Spread Over 1 Trillion Tokens
+            </p>
+
+            <small id="token_price"
+                style="opacity:0.7; text-align:center;">
+                Exact token price loading...
+            </small>
+
+            <small id="valuation_breakdown"
+                style="opacity:0.95; text-align:center; font-weight:700;">
+                InvestAI# Valuation: <span id="hero_investai_valuation" style="color:#ffffff;">Loading...</span>,
+                ProjectAI# Valuation: <span id="hero_projectai_valuation" style="color:#ffffff;">Loading...</span>
+            </small>
+
+            <p style="font-weight:200;">
+                NASDAQ-100 PE Ratio: <span id="nasdaq_pe">Loading...</span><br>
+                Applied PE for InvestAI: <span id="adjusted_pe">Loading...</span>
+            </p>
+
+        </div>
+
+        <div id="projectai_price_wrapper"
+            class="price-wrapper flex flex-direction-column gap-0-5 align-items-center justify-content-center">
+
+            <strong id="projectai_valuation_display"
+                style="font-size: 1.8rem; line-height: 1;">
+                Loading...
+            </strong>
+
+            <p style="font-weight:600;">
+                Current ProjectAI# Valuation <br>
+                Spread Over 1 Trillion Tokens
+            </p>
+
+            <small id="projectai_token_price"
+                style="opacity:0.95; text-align:center;">
+                Exact token price loading...
+            </small>
+
+            <p style="font-weight:200;">
+                <span style="opacity:0.95; font-weight:700;">YouTube Valuation Consumption:</span><br>
+                Valuation: <span id="projectai_box_value_per_view">Loading...</span> USD per View<br>
+                Current View Count: <span id="projectai_box_current_views">Loading...</span><br>
+                <a href="https://www.youtube.com/@ranchimallflo/shorts"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="projectai-video-source">
+                    Video Source
+                </a>
+            </p>
+
+        </div>
+
+        <div id="investai_price_wrapper"
+            class="price-wrapper flex flex-direction-column gap-0-5 align-items-center justify-content-center">
+
+            <strong id="investai_valuation_display"
+                style="font-size: 1.8rem; line-height: 1;">
+                Loading...
+            </strong>
+
+            <p style="font-weight:600;">
+                Current InvestAI# Valuation <br>
+                Spread Over 1 Trillion Tokens
+            </p>
+
+            <small id="investai_token_price"
+                style="opacity:0.95; text-align:center;">
+                Exact token price loading...
+            </small>
+
+            <p style="font-weight:200;">
+                NASDAQ-100 PE Ratio: <span id="investai_box_nasdaq_pe">Loading...</span><br>
+                Applied PE: <span id="investai_box_adjusted_pe">Loading...</span>
+            </p>
+
+        </div>
+        
         <ul class="important-links">
             <li class="important-link">
                 <a href="youtubevaluation.html">
