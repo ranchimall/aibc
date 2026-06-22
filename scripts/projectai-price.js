@@ -11,21 +11,42 @@ async function loadProjectAI() {
         const data =
             await response.json();
 
-        document.querySelector(
-            '#projectai_contribution'
-        ).innerHTML =
-            'YouTube Views Valuation<br>' +
-            data.currentViews.toLocaleString() +
-            ' Views';
+        const VALUE_PER_VIEW = 1;
+
+        const valuationContribution =
+            data.currentViews * VALUE_PER_VIEW;
 
         document.querySelector(
-            '#projectai_details'
-        ).innerHTML =
-            'Views Current Count: ' +
-            data.currentViews.toLocaleString() +
-            '<br>' +
-            'Views Start Count: ' +
+            '#projectai_percent'
+        ).innerText =
+            '0.00%';
+
+        document.querySelector(
+            '#projectai_value_per_view'
+        ).innerText =
+            VALUE_PER_VIEW.toFixed(2) +
+            ' USDT';
+
+        document.querySelector(
+            '#projectai_current_views'
+        ).innerText =
+            data.currentViews.toLocaleString();
+
+        document.querySelector(
+            '#projectai_start_count'
+        ).innerText =
             data.startingPoint.toLocaleString();
+
+        document.querySelector(
+            '#projectai_lifetime_views'
+        ).innerText =
+            data.lifetimeViews.toLocaleString();
+
+        document.querySelector(
+            '#projectai_contribution'
+        ).innerText =
+            valuationContribution.toLocaleString() +
+            ' USDT';
 
     } catch(error) {
 

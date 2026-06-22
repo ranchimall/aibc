@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Views Valuation Model</title>
+
+<style>
+
+:root {
+    --primary-blue: #00128a;
+    --border-blue: #78add9;
+    --arrow-blue: #0073e6;
+    --font-main: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--primary-blue);
+    background-color: #ffffff;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    width: 560px;
+    padding-right: 40px;
+    text-align: right;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.sidebar h1 {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    font-weight: bold;
+}
+
+.flowchart {
+    width: 700px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.node h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.node h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.badge {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.address-box {
+    border: 1px solid var(--border-blue);
+    border-radius: 6px;
+    padding: 10px 15px;
+    max-width: 380px;
+    margin: 0 auto 15px auto;
+    background-color: #fbfdff;
+}
+
+.address-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.address-value {
+    font-size: 0.95rem;
+}
+
+.arrow-down-container {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.arrow-line {
+    width: 3px;
+    height: 35px;
+    background-color: var(--arrow-blue);
+    position: relative;
+}
+
+.arrow-head {
+    position: absolute;
+    bottom: -5px;
+    left: -4px;
+    border-width: 6px 5px 0 5px;
+    border-style: solid;
+    border-color: var(--arrow-blue) transparent transparent transparent;
+}
+
+.desktop-fork-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stem-to-fork {
+    width: 3px;
+    height: 20px;
+    background-color: var(--arrow-blue);
+}
+
+.connector-fork {
+    position: relative;
+    height: 25px;
+    width: 66.66%;
+    border-top: 3px solid var(--arrow-blue);
+}
+
+.connector-fork .line {
+    position: absolute;
+    top: 0;
+    width: 3px;
+    height: 25px;
+    background-color: var(--arrow-blue);
+}
+
+.tier-value {
+    height: 60px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.tier-valuation {
+    height: 80px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.connector-fork .left { left: 0; }
+.connector-fork .center { left: 50%; transform: translateX(-50%); }
+.connector-fork .right { right: 0; }
+
+.branches {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.branch {
+    flex: 1 1 33.33%;
+    padding: 0 10px;
+}
+
+.branch p {
+    font-size: 0.9rem;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.highlight {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.final-box {
+    margin-top: 35px;
+    border: 2px solid var(--border-blue);
+    border-radius: 8px;
+    padding: 18px;
+    width: 420px;
+}
+
+.final-box h2 {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 968px) {
+
+    body {
+        align-items: flex-start;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        text-align: center;
+        padding-right: 0;
+        margin-bottom: 40px;
+        white-space: normal;
+    }
+
+    .flowchart {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .branches {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .branch {
+        margin-bottom: 40px;
+    }
+
+    .final-box {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+        <h1>
+            Consumption Valuation<br>
+            Structure for<br>
+            YouTube Views
+        </h1>
+    </div>
+
+    <div class="flowchart">
+
+        <div class="node">
+            <h2>RanchiMall YouTube Channel</h2>
+
+            <div class="badge">
+                Consumption Asset
+            </div>
+
+            <div class="address-box">
+                <div class="address-label">
+                    Channel Handle
+                </div>
+
+                <div class="address-value">
+                    ranchimallflo
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-down-container">
+            <div class="arrow-line">
+                <div class="arrow-head"></div>
+            </div>
+        </div>
+
+        <div class="node">
+            <h2>ProjectAI#</h2>
+
+            <div class="badge">
+                Native Token: PROJECTAI
+            </div>
+
+            <div class="address-box">
+                <div class="address-label">
+                    Valuation Source
+                </div>
+
+                <div class="address-value">
+                    YouTube Views
+                </div>
+            </div>
+        </div>
+
+        <div class="desktop-fork-wrapper">
+
+            <div class="stem-to-fork"></div>
+
+            <div class="connector-fork">
+                <div class="line left">
+                    <div class="arrow-head"></div>
+                </div>
+
+                <div class="line center">
+                    <div class="arrow-head"></div>
+                </div>
+
+                <div class="line right">
+                    <div class="arrow-head"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="branches">
+
+            <div class="branch">
+
+                <h3>Phase 1</h3>
+
+                <div class="highlight">
+                    0 → 200,000 Views
+                </div>
+
+                <div class="phase-value">
+                    1.00 USD / View
+                </div>
+
+                <div class="phase-valuation">
+                    Maximum Valuation
+                    <br>
+                    200,000 USD
+                </div>
+
+            </div>
+
+            <div class="branch">
+
+                <h3>Phase 2</h3>
+
+                <div class="highlight">
+                    200,001 → 1,200,000 Views
+                </div>
+
+                <div class="phase-value">
+                    0.50 USD / View
+                </div>
+
+                <div class="phase-valuation">
+                    Maximum Valuation
+                    <br>
+                    600,000 USD
+                </div>
+
+            </div>
+
+            <div class="branch">
+
+                <h3>Phase 3</h3>
+
+                <div class="highlight">
+                    1,200,001 → 2,400,000 Views
+                </div>
+
+                <div class="phase-value">
+                    0.33 USD / View
+                </div>
+
+                <div class="phase-valuation">
+                    Maximum Valuation
+                    <br>
+                    800,000 USD
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="final-box">
+
+            <h2>
+                Maximum Consumption Valuation
+            </h2>
+
+            <div class="badge">
+                1.6 Million USD
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
