@@ -21,9 +21,12 @@ jobs:
       #BLOCK OVER
 
       - name: Fetch prices and generate JSON
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
           python <<EOF
           import json
+          import os
           import requests
           import yfinance as yf
           from datetime import datetime
@@ -57,6 +60,12 @@ jobs:
           print("NASDAQ PE:", NASDAQ_PE)
 
           ADJUSTED_PE = NASDAQ_PE - 10
+
+          # ===== PROJECT AI =====
+
+          YOUTUBE_STARTING_POINT = 4300
+
+          YOUTUBE_API_KEY = os.environ["YOUTUBE_API_KEY"]
 
           # ===== BINANCE HISTORY =====
 
@@ -209,6 +218,38 @@ jobs:
           valuation = max(0, profit * ADJUSTED_PE)
 
           token_price = valuation / TOTAL_SUPPLY
+
+
+          # ===== FETCH YOUTUBE VIEWS =====
+
+          youtube_url = (
+              "https://www.googleapis.com/youtube/v3/channels"
+              "?part=statistics"
+              "&forHandle=ranchimallflo"
+              f"&key={YOUTUBE_API_KEY}"
+          )
+
+          youtube_response = requests.get(youtube_url)
+
+          youtube_data = youtube_response.json()
+
+          lifetime_views = int(
+              youtube_data["items"][0]["statistics"]["viewCount"]
+          )
+
+          current_views = max(
+              0,
+              lifetime_views - YOUTUBE_STARTING_POINT
+          )
+
+          projectai_result = {
+              "lifetimeViews": lifetime_views,
+              "startingPoint": YOUTUBE_STARTING_POINT,
+              "currentViews": current_views
+          }
+
+          print("Lifetime Views:", lifetime_views)
+          print("Current Views:", current_views)
 
 
           # ===== OUTPUT =====
@@ -375,6 +416,8 @@ jobs:
           
           with open("data/prices.json", "w") as f:
               json.dump(result, f, indent=2)
+          with open("data/projectai.json", "w") as f:
+              json.dump(projectai_result, f, indent=2)    
 
           print(result)
 
@@ -387,6 +430,7 @@ jobs:
 
           git add data/prices.json
           git add data/history.json
+          git add data/projectai.json
 
           git diff --cached --quiet || git commit -m "Update investai prices"
 
