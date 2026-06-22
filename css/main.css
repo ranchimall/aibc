@@ -409,6 +409,13 @@ sm-copy {
   text-decoration: underline;
 }
 
+.important-link a.important-link-stacked {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
