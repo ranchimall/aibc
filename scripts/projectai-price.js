@@ -21,10 +21,10 @@ async function loadProjectAI() {
         document.querySelector(
             '#projectai_details'
         ).innerHTML =
-            'Current Views: ' +
+            'Views Current Count: ' +
             data.currentViews.toLocaleString() +
             '<br>' +
-            'Views Starting Point: ' +
+            'Views Start Count: ' +
             data.startingPoint.toLocaleString();
 
     } catch(error) {

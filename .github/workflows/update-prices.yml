@@ -225,13 +225,14 @@ jobs:
           youtube_url = (
               "https://www.googleapis.com/youtube/v3/channels"
               "?part=statistics"
-              "&forHandle=ranchimallflo"
+              "&id=UCyoIDJydvU7RCrILBJaPT4A"
               f"&key={YOUTUBE_API_KEY}"
           )
 
           youtube_response = requests.get(youtube_url)
 
           youtube_data = youtube_response.json()
+          print(youtube_data)
 
           lifetime_views = int(
               youtube_data["items"][0]["statistics"]["viewCount"]
