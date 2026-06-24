@@ -343,13 +343,15 @@ sm-copy {
 
 .price-wrapper #valuation_display,
 .price-wrapper #projectai_valuation_display,
-.price-wrapper #investai_valuation_display {
+.price-wrapper #investai_valuation_display,
+.price-wrapper #openclaw_valuation_display {
   font-size: clamp(2rem, 5vw, 3rem) !important;
 }
 
 .price-wrapper #token_price,
 .price-wrapper #projectai_token_price,
-.price-wrapper #investai_token_price {
+.price-wrapper #investai_token_price,
+.price-wrapper #openclaw_token_price {
   opacity: 0.95 !important;
 }
 

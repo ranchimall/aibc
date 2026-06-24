@@ -68,9 +68,12 @@ async function loadTokenPrice() {
         const projectAIValuation =
             projectAIData.valuation ??
             projectAIData.currentViews * projectAIValuePerView;
+
+        const openClawValuation =
+            window.openClawPriceData?.valuation ?? 0;
         
         const totalAIBCValuation =
-            data.valuation + projectAIValuation;
+            data.valuation + projectAIValuation + openClawValuation;
 
         const totalAIBCTokenPrice =
             totalAIBCValuation / TOTAL_SUPPLY;    
@@ -89,6 +92,11 @@ async function loadTokenPrice() {
         const projectAIContributionPercent =
             totalAIBCValuation > 0
                 ? (projectAIValuation / totalAIBCValuation) * 100
+                : 0;
+
+        const openClawContributionPercent =
+            totalAIBCValuation > 0
+                ? (openClawValuation / totalAIBCValuation) * 100
                 : 0;    
 
 
@@ -111,6 +119,10 @@ async function loadTokenPrice() {
         document.querySelector('#hero_projectai_valuation')
             .innerText =
             projectAIValuation.toFixed(2) + ' USDT';
+
+        document.querySelector('#hero_openclaw_valuation')
+            .innerText =
+            openClawValuation.toFixed(2) + ' USDT';
 
         document.querySelector('#projectai_valuation_display')
             .innerText =
@@ -190,9 +202,9 @@ async function loadTokenPrice() {
             .innerText =
         data.profit.toFixed(2) + ' USDT';    
 
-        document.querySelector('#openclaw_contribution')
+        document.querySelector('#openclaw_percent')
             .innerText =
-            '0.00 USDT';
+            openClawContributionPercent.toFixed(2) + '%';
 
         document.querySelector('#projectai_percent')
             .innerText =

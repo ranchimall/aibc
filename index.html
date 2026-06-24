@@ -117,6 +117,7 @@
                 style="opacity:0.95; text-align:center; font-weight:700;">
                 InvestAI# Valuation: <span id="hero_investai_valuation" style="color:#ffffff;">Loading...</span>,
                 ProjectAI# Valuation: <span id="hero_projectai_valuation" style="color:#ffffff;">Loading...</span>
+                OpenClaw# Valuation: <span id="hero_openclaw_valuation" style="color:#ffffff;">Loading...</span>
             </small>
 
             <p style="font-weight:200;">
@@ -192,6 +193,32 @@
             </p>
 
         </div>
+
+        <div id="openclaw_price_wrapper"
+            class="price-wrapper flex flex-direction-column gap-0-5 align-items-center justify-content-center">
+
+            <strong id="openclaw_valuation_display"
+                style="font-size: 1.8rem; line-height: 1;">
+                Loading...
+            </strong>
+
+            <p style="font-weight:600;">
+                Current OpenClaw# Valuation <br>
+                Spread Over 1 Trillion Tokens
+            </p>
+
+            <small id="openclaw_token_price"
+                style="opacity:0.95; text-align:center;">
+                Exact token price loading...
+            </small>
+
+            <p style="font-weight:200;">
+                <span style="opacity:0.95; font-weight:700;">Valuation Consumption:</span><br>
+                100 USD per Installation<br>
+                Current Installations: <span id="openclaw_box_current_installations">Loading...</span>
+            </p>
+
+        </div>
         
         <div id="contribution_card">
 
@@ -245,13 +272,40 @@
                         OpenClaw#
                     </div>
 
-                    <div id="openclaw_contribution"
-                         class="contribution-value">
-                        0.00 USDT
+                    <div class="contribution-label">
+                        Contribution %
                     </div>
 
-                    <div class="contribution-percent">
-                        0.00%
+                    <div id="openclaw_percent"
+                         class="contribution-extra-value">
+                        Loading...
+                    </div>
+
+                    <div class="contribution-label">
+                        Value Per Install
+                    </div>
+
+                    <div id="openclaw_value_per_install"
+                         class="contribution-extra-value">
+                        Loading...
+                    </div>
+
+                    <div class="contribution-label">
+                        Current Installations
+                    </div>
+
+                    <div id="openclaw_current_installations"
+                         class="contribution-extra-value">
+                        Loading...
+                    </div>
+
+                    <div class="contribution-label">
+                        Valuation Contribution
+                    </div>
+
+                    <div id="openclaw_contribution"
+                         class="contribution-value">
+                        Loading...
                     </div>
                 </div>
 
@@ -904,6 +958,7 @@
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts/openclaw-price.js"></script>
     <script src="./scripts/investai-price.js?v=20260531"></script>
     <script src="scripts/projectai-price.js"></script>
 </body>
