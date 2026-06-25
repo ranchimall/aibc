@@ -494,13 +494,10 @@ table td:last-of-type {
   background-color: rgba(var(--foreground-color), 0.7);
   box-shadow: 0 0.5rem 1.2rem rgba(var(--text-color), 0.04);
 }
-.contribution-item:first-child {
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 1px rgba(61, 90, 254, 0.08), 0 0.5rem 1.2rem rgba(61, 90, 254, 0.08);
-}
+
 .contribution-item:first-child .contribution-name,
 .contribution-item:first-child .contribution-value,
-#projectai_contribution,
+#openclaw_contribution,
 #projectai_contribution {
   color: var(--accent-color);
 }
