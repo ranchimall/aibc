@@ -536,6 +536,7 @@ table td:last-of-type {
 
 .contribution-item:first-child .contribution-name,
 .contribution-item:first-child .contribution-value,
+#projectai_contribution,
 #projectai_contribution {
   color: var(--accent-color);
 }
