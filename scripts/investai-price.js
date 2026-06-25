@@ -536,19 +536,100 @@ async function loadValuationChart() {
         const history =
             await response.json();
 
-        const labels =
-            history.valuation.map(
-                item => item.date
+        function normalizeSeries(series) {
+            if (Array.isArray(series)) {
+                return series;
+            }
+
+            if (
+                series &&
+                typeof series === 'object' &&
+                'date' in series
+            ) {
+                return [series];
+            }
+
+            return [];
+        }
+
+        const investAIValuationSeries =
+            normalizeSeries(history.valuation);
+
+        const projectAIValuationSeries =
+            normalizeSeries(
+                history.projectaiValuation
             );
 
+        const openClawValuationSeries =
+            normalizeSeries(
+                history.openclawValuation
+            );
+
+        const normalizedAIBCSeries =
+            normalizeSeries(history.aibcValuation);
+
+        const aibcValuationSeries =
+            normalizedAIBCSeries.length > 0
+                ? normalizedAIBCSeries
+                : investAIValuationSeries;
+
+        const profitSeries =
+            normalizeSeries(history.profit);
+
+        const labels =
+            [
+                ...new Set([
+                    ...investAIValuationSeries.map(
+                        item => item.date
+                    ),
+                    ...projectAIValuationSeries.map(
+                        item => item.date
+                    ),
+                    ...openClawValuationSeries.map(
+                        item => item.date
+                    ),
+                    ...aibcValuationSeries.map(
+                        item => item.date
+                    ),
+                    ...profitSeries.map(
+                        item => item.date
+                    )
+                ])
+            ].sort();
+
+        function mapSeriesToLabels(series) {
+            const seriesMap = new Map(
+                series.map(item => [
+                    item.date,
+                    item.value
+                ])
+            );
+
+            return labels.map(label =>
+                seriesMap.has(label)
+                    ? seriesMap.get(label)
+                    : null
+            );
+        }
+
         const valuationData =
-            history.valuation.map(
-                item => item.value
+            mapSeriesToLabels(
+                aibcValuationSeries
+            );
+
+        const projectAIValuationData =
+            mapSeriesToLabels(
+                projectAIValuationSeries
+            );
+
+        const openClawValuationData =
+            mapSeriesToLabels(
+                openClawValuationSeries
             );
 
         const profitData =
-            history.profit.map(
-                item => item.value
+            mapSeriesToLabels(
+                profitSeries
             );    
 
         const ctx =
@@ -591,7 +672,9 @@ async function loadValuationChart() {
 
                         data:
                             valuationData,
-                            
+
+                        spanGaps: true,
+                             
                         yAxisID:
                             'valuationAxis',
 
@@ -613,10 +696,62 @@ async function loadValuationChart() {
                     },
 
                     {
+                        label: 'ProjectAI Valuation',
+
+                        data:
+                            projectAIValuationData,
+
+                        spanGaps: true,
+
+                        yAxisID:
+                            'valuationAxis',
+
+                        fill: false,
+
+                        borderWidth: 3,
+
+                        borderColor:
+                            '#2F80ED',
+
+                        tension: 0.3,
+
+                        pointRadius: 0,
+
+                        pointHoverRadius: 6
+                    },
+
+                    {
+                        label: 'OpenClaw Valuation',
+
+                        data:
+                            openClawValuationData,
+
+                        spanGaps: true,
+
+                        yAxisID:
+                            'valuationAxis',
+
+                        fill: false,
+
+                        borderWidth: 3,
+
+                        borderColor:
+                            '#F2994A',
+
+                        tension: 0.3,
+
+                        pointRadius: 0,
+
+                        pointHoverRadius: 6
+                    },
+
+                    {
                         label: 'Portfolio Profit',
 
                         data:
                             profitData,
+
+                        spanGaps: true,
 
                         yAxisID:
                             'profitAxis',

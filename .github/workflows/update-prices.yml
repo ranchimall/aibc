@@ -247,6 +247,15 @@ jobs:
 
           projectai_valuation = current_views * PROJECTAI_VALUE_PER_VIEW
 
+          OPENCLAW_VALUE_PER_INSTALL = 100
+          OPENCLAW_CURRENT_INSTALLATIONS = 6
+          openclaw_valuation = (
+              OPENCLAW_VALUE_PER_INSTALL *
+              OPENCLAW_CURRENT_INSTALLATIONS
+          )
+
+          today_utc = datetime.utcnow().strftime("%Y-%m-%d")
+
           projectai_result = {
               "lifetimeViews": lifetime_views,
               "startingPoint": YOUTUBE_STARTING_POINT,
@@ -407,12 +416,134 @@ jobs:
                   )
               })
 
+          existing_history = {}
+
+          if os.path.exists("data/history.json"):
+              try:
+                  with open("data/history.json", "r") as f:
+                      existing_history = json.load(f)
+              except Exception:
+                  existing_history = {}
+
+          def normalize_series(series):
+              if isinstance(series, list):
+                  return series
+
+              if (
+                  isinstance(series, dict) and
+                  "date" in series
+              ):
+                  return [series]
+
+              return []
+
+          def upsert_snapshot(series, date, value):
+              cleaned = [
+                  item for item in normalize_series(series)
+                  if item.get("date") != date
+              ]
+
+              cleaned.append({
+                  "date": date,
+                  "value": round(value, 2)
+              })
+
+              return sorted(
+                  cleaned,
+                  key=lambda item: item["date"]
+              )
+
+          projectai_valuation_history = upsert_snapshot(
+              existing_history.get(
+                  "projectaiValuation",
+                  []
+              ),
+              today_utc,
+              projectai_valuation
+          )
+
+          openclaw_valuation_history = upsert_snapshot(
+              existing_history.get(
+                  "openclawValuation",
+                  []
+              ),
+              today_utc,
+              openclaw_valuation
+          )
+
+          chart_dates = set(all_dates)
+
+          for item in projectai_valuation_history:
+              chart_dates.add(item["date"])
+
+          for item in openclaw_valuation_history:
+              chart_dates.add(item["date"])
+
+          chart_dates = sorted(chart_dates)
+
+          investai_valuation_map = {
+              item["date"]: item["value"]
+              for item in valuation_history
+          }
+
+          projectai_valuation_map = {
+              item["date"]: item["value"]
+              for item in projectai_valuation_history
+          }
+
+          openclaw_valuation_map = {
+              item["date"]: item["value"]
+              for item in openclaw_valuation_history
+          }
+
+          aibc_total_valuation_history = []
+
+          last_investai_valuation = None
+          last_projectai_valuation = 0
+          last_openclaw_valuation = 0
+
+          for date in chart_dates:
+              investai_valuation = investai_valuation_map.get(date)
+
+              if investai_valuation is not None:
+                  last_investai_valuation = investai_valuation
+              else:
+                  investai_valuation = last_investai_valuation
+
+              projectai_value = projectai_valuation_map.get(date)
+
+              if projectai_value is not None:
+                  last_projectai_valuation = projectai_value
+              else:
+                  projectai_value = last_projectai_valuation
+
+              openclaw_value = openclaw_valuation_map.get(date)
+
+              if openclaw_value is not None:
+                  last_openclaw_valuation = openclaw_value
+              else:
+                  openclaw_value = last_openclaw_valuation
+
+              total_valuation = (
+                  (investai_valuation or 0) +
+                  projectai_value +
+                  openclaw_value
+              )
+
+              aibc_total_valuation_history.append({
+                  "date": date,
+                  "value": round(total_valuation, 2)
+              })
+
           history_result = {
               "muon": muon_chart_history,
               "tsmon": tsmon_chart_history,
               "googlon": googlon_chart_history,
               "valuation": valuation_history,
-              "profit": profit_history
+              "profit": profit_history,
+              "projectaiValuation": projectai_valuation_history,
+              "openclawValuation": openclaw_valuation_history,
+              "aibcValuation": aibc_total_valuation_history
           }
 
 
