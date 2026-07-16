@@ -993,6 +993,12 @@ button.holding-card:hover, button.holding-card:focus-visible {
   font-weight: 800;
 }
 
+.event-icon svg {
+  width: 1.45rem;
+  height: 1.45rem;
+  stroke-width: 2;
+}
+
 .event-metric-row small {
   display: block;
   color: rgba(var(--text-color), 0.68);
