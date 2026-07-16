@@ -52,28 +52,118 @@
         </div>
     </header>
 
-    <main class="liquidity-page">
-        <div class="app liquidity-event-card">
-            <h2>Liquidity Events</h2>
+    <main class="liquidity-events-page">
+        <section class="liquidity-events-panel">
+            <div class="liquidity-events-header">
+                <div>
+                    <h2>Liquidity Events</h2>
+                    <p>Explore all our liquidity events.</p>
+                </div>
 
-            <p>
-                At <strong>13195 USD</strong> Valuation 1 percent of AIBC sold to the FLO Address<br>
-                <a href="https://ranchimall.github.io/floscout/#/address/FGXjtktPiVhR6ZPiyVP7yQWFLUts8viXJZ"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="liquidity-address-link">
-                    FGXjtktPiVhR6ZPiyVP7yQWFLUts8viXJZ
+                <a href="#" class="liquidity-outline-button">
+                    View All Events
                 </a>
-                for consideration of <strong>132 USDT</strong>
-            </p>
+            </div>
 
-            <a href="https://ranchimall.github.io/floscout/#/transaction/c09a5e45083ed5cd442f20ac3a1d54f47f7d1f4bfb758101f7c8327b81744e05"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="price-wrapper-link price-wrapper-link--compact liquidity-card-link">
-                View transaction details
-            </a>
-        </div>
+            <div class="liquidity-events-grid">
+                <article class="liquidity-event-box">
+                    <div class="event-box-top">
+                        <span class="event-label">Event #1</span>
+                        <span class="event-status event-status-confirmed">Confirmed</span>
+                    </div>
+
+                    <div class="event-metric-row">
+                        <span class="event-icon">V</span>
+                        <div>
+                            <small>At valuation</small>
+                            <strong>$13,195</strong>
+                        </div>
+                    </div>
+
+                    <div class="event-metric-row">
+                        <span class="event-icon">%</span>
+                        <div>
+                            <small>AIBC sold</small>
+                            <strong>1%</strong>
+                        </div>
+                    </div>
+
+                    <div class="event-metric-row">
+                        <span class="event-icon">$</span>
+                        <div>
+                            <small>Consideration</small>
+                            <strong>132 USDT</strong>
+                        </div>
+                    </div>
+
+                    <div class="event-divider"></div>
+
+                    <div class="event-metric-row event-metric-row--with-action">
+                        <span class="event-icon">B</span>
+                        <div>
+                            <small>Buyer FLO Address</small>
+
+                            <a href="https://ranchimall.github.io/floscout/#/address/FGXjtktPiVhR6ZPiyVP7yQWFLUts8viXJZ"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="liquidity-address-link">
+                                FGXjtktPiVhR6ZPiyVP7yQWFLUts8viXJZ
+                            </a>
+                        </div>      
+
+                        <sm-copy class="copy-button-only" value="FGXjtktPiVhR6ZPiyVP7yQWFLUts8viXJZ" clip-text></sm-copy>
+                        
+                    </div>
+                    <div class="event-metric-row">
+                        <span class="event-icon">T</span>
+                        <div>
+                            <small>Tokens bought</small>
+                            <strong>10,000,000,000 AIBC</strong>
+                        </div>
+                    </div>
+
+                    <div class="event-metric-row">
+                        <span class="event-icon">D</span>
+                        <div>
+                            <small>Date</small>
+                            <strong>15 Jul 2026</strong>
+                        </div>
+                    </div>
+
+                    <div class="event-divider"></div>
+   
+                    <a href="https://ranchimall.github.io/floscout/#/transaction/c09a5e45083ed5cd442f20ac3a1d54f47f7d1f4bfb758101f7c8327b81744e05"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="liquidity-outline-button event-main-button">
+                        View Transaction Details
+                    </a>
+
+                    <div class="event-footer event-footer--split">
+                        <span>Tx Hash: c09a...4e05</span>
+                        
+                        <a href="https://blockbook.ranchimall.net/tx/c09a5e45083ed5cd442f20ac3a1d54f47f7d1f4bfb758101f7c8327b81744e05"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            View on Address Indexer
+                        </a>
+                    </div>
+                </article>
+
+                <article class="liquidity-event-box upcoming-event-box">
+                    <div class="event-box-top">
+                        <span class="event-label">Event #2</span>
+                        <span class="event-status">Upcoming</span>
+                    </div>
+
+                    <div class="upcoming-event-content">
+                        <div class="upcoming-icon">+</div>
+                        <h3>Upcoming Event</h3>
+                        <p>Details will be available soon.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
 
         <div class="price-wrapper liquidity-blue-box flex flex-direction-column gap-0-5 align-items-center justify-content-center">
             <strong style="font-size: 1.8rem; line-height: 1;">
