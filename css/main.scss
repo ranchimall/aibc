@@ -109,6 +109,36 @@ header {
   justify-content: space-between;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top-tab {
+  color: rgba(var(--text-color), 0.9);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.top-tab:hover {
+  color: var(--accent-color);
+}
+
+.liquidity-page {
+  width: var(--content-width);
+  margin: 6rem auto;
+}
+
+.liquidity-event-card {
+  min-height: 18rem;
+}
+
+.liquidity-event-card strong {
+  word-break: break-word;
+}
+
 main {
   display: grid;
   gap: 1rem;
@@ -815,6 +845,33 @@ button.holding-card:hover, button.holding-card:focus-visible {
 .chart-wrapper canvas {
     width: 100% !important;
     height: 450px !important;
+}
+
+.liquidity-blue-box {
+  margin-top: 2rem;
+}
+
+.liquidity-card-link {
+  align-self: flex-start;
+  color: var(--accent-color);
+  background: rgba(61, 90, 254, 0.08);
+  box-shadow: 0 0 0 1px rgba(61, 90, 254, 0.22) inset;
+}
+
+.liquidity-card-link:hover {
+  background: rgba(61, 90, 254, 0.14);
+}
+
+
+.liquidity-address-link {
+  color: var(--accent-color);
+  font-weight: 700;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.liquidity-address-link:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 760px) {
