@@ -457,6 +457,12 @@ sm-copy {
   margin-top: 0.5rem;
 }
 
+.project-links-grid--center-single .project-link-card:only-child {
+  grid-column: 1/-1;
+  justify-self: center;
+  width: calc((100% - 1rem) / 2);
+}
+
 .project-link-card {
   display: flex;
   flex-direction: column;
@@ -519,6 +525,9 @@ sm-copy {
 @media (max-width: 480px) {
   .project-links-grid {
     grid-template-columns: 1fr;
+  }
+  .project-links-grid--center-single .project-link-card:only-child {
+    width: 100%;
   }
 }
 .important-links {
@@ -1039,6 +1048,12 @@ button.holding-card:hover, button.holding-card:focus-visible {
   font-weight: 800;
 }
 
+.event-icon svg {
+  width: 1.45rem;
+  height: 1.45rem;
+  stroke-width: 2;
+}
+
 .event-metric-row small {
   display: block;
   color: rgba(var(--text-color), 0.68);
@@ -1160,13 +1175,16 @@ button.holding-card:hover, button.holding-card:focus-visible {
 .event-metric-row--with-action sm-copy.copy-button-only {
   justify-self: end;
   align-self: center;
-  width: auto;
-  min-width: max-content;
+  width: 4.2rem;
+  min-width: 4.2rem;
+  max-width: 4.2rem;
+  overflow: hidden;
   color: transparent;
 }
 
 .event-metric-row--with-action sm-copy.copy-button-only::part(button) {
   color: rgba(var(--text-color), 0.9);
+  transform: translateX(-0.5rem);
 }
 
 @media (max-width: 900px) {

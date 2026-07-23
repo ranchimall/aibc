@@ -431,6 +431,12 @@ sm-copy {
   margin-top: 0.5rem;
 }
 
+.project-links-grid--center-single .project-link-card:only-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - 1rem) / 2);
+}
+
 .project-link-card {
   display: flex;
   flex-direction: column;
@@ -493,6 +499,10 @@ sm-copy {
 @media (max-width: 480px) {
   .project-links-grid {
     grid-template-columns: 1fr;
+  }
+
+  .project-links-grid--center-single .project-link-card:only-child {
+    width: 100%;
   }
 }
 
