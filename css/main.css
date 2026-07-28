@@ -463,6 +463,10 @@ sm-copy {
   width: calc((100% - 1rem) / 2);
 }
 
+#openclaw_details_wrapper .project-links-grid--center-single {
+  justify-items: center;
+}
+
 .project-link-card {
   display: flex;
   flex-direction: column;
