@@ -471,18 +471,15 @@ sm-copy {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  gap: 0.5rem;
+  min-height: 210px;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
 }
 
-.project-link-card h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #fff;
+.project-link-card h3,
+.project-link-card p {
+  margin: 0;
 }
 
 .project-link-card p {
@@ -494,7 +491,7 @@ sm-copy {
 }
 
 .project-link-card .price-wrapper-link {
-  margin-top: 0;
+  margin-top: 0.5rem;
 }
 
 .project-details-wrapper {
