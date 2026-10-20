@@ -63,8 +63,6 @@ jobs:
 
           # ===== PROJECT AI =====
 
-          YOUTUBE_STARTING_POINT = 4300
-
           YOUTUBE_API_KEY = os.environ["YOUTUBE_API_KEY"]
 
           # ===== BINANCE HISTORY =====
@@ -238,14 +236,47 @@ jobs:
               youtube_data["items"][0]["statistics"]["viewCount"]
           )
 
-          current_views = max(
-              0,
-              lifetime_views - YOUTUBE_STARTING_POINT
-          )
 
-          PROJECTAI_VALUE_PER_VIEW = 1
 
-          projectai_valuation = current_views * PROJECTAI_VALUE_PER_VIEW
+          # Starting point removed: current views equals full lifetime views
+          current_views = max(0, lifetime_views)
+
+          # ===== THREE-PHASE PROGRESSIVE VALUATION =====
+          PHASE_1_CAP = 200_000
+          PHASE_2_CAP = 1_200_000
+          PHASE_3_CAP = 2_400_000
+
+          RATE_PHASE_1 = 1.00
+          RATE_PHASE_2 = 0.50
+          RATE_PHASE_3 = 0.33
+
+          if current_views <= PHASE_1_CAP:
+              projectai_valuation = current_views * RATE_PHASE_1
+              current_rate = RATE_PHASE_1
+
+          elif current_views <= PHASE_2_CAP:
+              tier1 = PHASE_1_CAP * RATE_PHASE_1
+              tier2 = (current_views - PHASE_1_CAP) * RATE_PHASE_2
+              projectai_valuation = tier1 + tier2
+              current_rate = RATE_PHASE_2
+
+          elif current_views <= PHASE_3_CAP:
+              tier1 = PHASE_1_CAP * RATE_PHASE_1
+              tier2 = (PHASE_2_CAP - PHASE_1_CAP) * RATE_PHASE_2
+              tier3 = (current_views - PHASE_2_CAP) * RATE_PHASE_3
+              projectai_valuation = tier1 + tier2 + tier3
+              current_rate = RATE_PHASE_3
+
+          else:
+              # Views above 2,400,000: capped at max tier
+              tier1 = PHASE_1_CAP * RATE_PHASE_1
+              tier2 = (PHASE_2_CAP - PHASE_1_CAP) * RATE_PHASE_2
+              tier3 = (PHASE_3_CAP - PHASE_2_CAP) * RATE_PHASE_3
+              projectai_valuation = tier1 + tier2 + tier3
+              current_rate = RATE_PHASE_3
+
+          projectai_valuation = round(projectai_valuation, 2)
+          PROJECTAI_VALUE_PER_VIEW = current_rate
 
           OPENCLAW_VALUE_PER_INSTALL = 100
           OPENCLAW_CURRENT_INSTALLATIONS = 6
@@ -258,7 +289,7 @@ jobs:
 
           projectai_result = {
               "lifetimeViews": lifetime_views,
-              "startingPoint": YOUTUBE_STARTING_POINT,
+              "startingPoint": 0,
               "currentViews": current_views,
               "valuePerView": PROJECTAI_VALUE_PER_VIEW,
               "valuation": projectai_valuation

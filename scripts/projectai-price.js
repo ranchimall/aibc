@@ -27,11 +27,6 @@ async function loadProjectAI() {
             data.currentViews.toLocaleString();
 
         document.querySelector(
-            '#projectai_start_count'
-        ).innerText =
-            data.startingPoint.toLocaleString();
-
-        document.querySelector(
             '#projectai_lifetime_views'
         ).innerText =
             data.lifetimeViews.toLocaleString();
